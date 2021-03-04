@@ -225,10 +225,10 @@ var UI = (function () {
       // if ( (!this.isFalse && !this.isResize) && ($(window).height() >= this.tempScreenHeight) ) {
       if ($(window).height() >= this.tempScreenHeight && !this.isFalse && !this.isResize) {
         for (i = 0; i < _length; i++) {
-          if (_scrollTop + $(this.parent).outerHeight() >= this.offsetArray[i] && _scrollTop - $(this.parent).outerHeight() <= this.offsetArray[i + 1]) {
+          if (_scrollTop + $(this.navigation).outerHeight() >= this.offsetArray[i] && _scrollTop - $(this.navigation).outerHeight() <= this.offsetArray[i + 1]) {
             // 2020-10-05 수정
             /* 2020-10-05 수정 시작 */
-            if (_scrollTop + $(this.parent).outerHeight() === $(document).height() - $(window).height()) {
+            if (_scrollTop + $(this.navigation).outerHeight() === $(document).height() - $(window).height()) {
               _index = _length - 1
               // console.log('[sideNavigation{} scrollAnimation()] 마지막 화면입니다. _index: ', _index)
             } else {
@@ -245,7 +245,7 @@ var UI = (function () {
           // console.log("this.offsetArray[" + i + "]: ", this.offsetArray[i]);
           // console.log("this.offsetArray[_length - 1]: ", this.offsetArray[_length - 1]);
 
-          if (_scrollTop + $(this.parent).outerHeight() > this.offsetArray[_length - 1]) {
+          if (_scrollTop + $(this.navigation).outerHeight() > this.offsetArray[_length - 1]) {
             _index = _length - 1
             // console.log("[sideNavigation{} scrollAnimation()] 마지막 화면입니다. _index: ", _index);
           }
@@ -264,7 +264,7 @@ var UI = (function () {
         return
       }
 
-      ;(this.wrapper = arguments[0].wrapper), (this.parent = arguments[0].parent), (this.selector = arguments[0].selector), (this.activation = arguments[0].activation), (this.duration = !!arguments[0].duration && typeof arguments[0].duration !== 'undefined' ? arguments[0].duration : 400), (this.nextContentButton = !!arguments[0].nextContentButton && typeof arguments[0].nextContentButton !== 'undefined' ? arguments[0].nextContentButton : false), (this.offsetArray = []), (this.isFalse = false), (this.isResize = false)
+      ;(this.wrapper = arguments[0].wrapper), (this.navigation = arguments[0].navigation), (this.selector = arguments[0].selector), (this.activation = arguments[0].activation), (this.duration = !!arguments[0].duration && typeof arguments[0].duration !== 'undefined' ? arguments[0].duration : 400), (this.nextContentButton = !!arguments[0].nextContentButton && typeof arguments[0].nextContentButton !== 'undefined' ? arguments[0].nextContentButton : false), (this.offsetArray = []), (this.isFalse = false), (this.isResize = false)
 
       this.temp = -1
       this.tempScreenHeight = -1
@@ -299,7 +299,7 @@ var UI = (function () {
           .stop()
           .animate(
             {
-              scrollTop: _offset - $(that.parent).outerHeight()
+              scrollTop: _offset - $(that.navigation).outerHeight()
             },
             that.duration,
             function () {
@@ -407,7 +407,7 @@ var UI = (function () {
 })()
 
 UI.setFullPageScroll.initialize({
-  navigation: '.navigation',
+  navigation: '#header',
   selector: '[class ^= "effect"]', // 효과를 넣을 요소의 공통된 HTML 클래스명을 넣습니다. (필수)
   distance: 0, // 간격을 설정합니다. 기본 값은 0입니다.
   activation: 'activate', // { selector: .. }를 활성화시킬 HTML 클래스명을 넣습니다. (필수)
@@ -424,7 +424,7 @@ UI.setFullPageScroll.initialize({
 /* setSideNavigation (sideNavigation)만 사용할 수 없습니다. setFullPageScroll (fullPageScroll)과 함께 사용합니다. */
 UI.setSideNavigation.initialize({
   wrapper: '.section',
-  parent: '.navigation',
+  navigation: '#header',
   selector: '.navigation > li > a', // 기능을 넣을 요소의 HTML 클래스명을 넣습니다. (필수)
   activation: 'current', // { selector: .. }를 활성화시킬 HTML 클래스명을 넣습니다. (필수)
   duration: 800, // 스크롤 이동 속도입니다. 기본 값은 400입니다.
